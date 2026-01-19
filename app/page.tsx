@@ -136,7 +136,7 @@ export default function Home() {
                 <div className="relative bg-cream-100 rounded-3xl overflow-hidden border-4 border-coffee-900">
                   {/* Replace with actual image */}
                   <Image
-                    src="/profile.jpeg" 
+                    src="/profile.jpg" 
                     alt="Jay"
                     width={500}
                     height={500}
