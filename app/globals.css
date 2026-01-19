@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cursor-glow-size: 20px;
+  --cursor-glow-color: rgba(212, 115, 94, 0.4);
+}
+
+* {
+  cursor: none;
+}
+
+@layer base {
+  body {
+    @apply bg-cream-50 text-warm-charcoal antialiased;
+  }
+}
+
+@layer utilities {
+  .cursor-glow {
+    pointer-events: none;
+    position: fixed;
+    width: var(--cursor-glow-size);
+    height: var(--cursor-glow-size);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--cursor-glow-color) 0%,
+      transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: width 0.2s ease, height 0.2s ease;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
