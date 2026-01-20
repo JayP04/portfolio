@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import ProjectCard from '@/components/ProjectCard';
-import ProjectTimeline from '@/components/ProjectTimeline';
+// import ProjectTimeline from '@/components/ProjectTimeline';
 import ContactForm from '@/components/ContactForm';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
@@ -137,7 +137,7 @@ export default function Home() {
                   {/* Replace with actual image */}
                   <Image
                     src="/profile.jpg" 
-                    alt="Jay"
+                    alt="Jay Patel"
                     width={500}
                     height={500}
                     className="w-full h-full object-cover"

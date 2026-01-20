@@ -23,8 +23,11 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Jay - Computer Science Student & Developer',
-  description: 'Portfolio of Jay - Full-stack developer, blockchain enthusiast, and CS student at University of Kansas',
+  title: 'Jay Patel',
+  description: 'Portfolio of Jay Patel',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
