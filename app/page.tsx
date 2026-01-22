@@ -24,7 +24,7 @@ export default function Home() {
       title: 'SafeChain',
       description: 'Decentralized disaster communication app with WiFi-based messaging and peer device visualization.',
       detailedDescription: 'Led front-end development and WiFi-based messaging implementation for a decentralized disaster communication application. Built real-time peer device visualization using Leaflet.js mapping library and implemented local message storage with IPFS synchronization for offline-first architecture. Integrated WebSocket connections for instant communication and deployed smart contracts on Polygon network for decentralized message verification.',
-      technologies: ['ReactJS', 'NodeJS', 'PostgreSQL', 'WebSockets', 'IPFS', 'Polygon', 'Leaflet.js'],
+      technologies: ['React', 'NodeJS', 'PostgreSQL', 'WebSockets', 'IPFS', 'Pinata'],
       githubUrl: 'https://github.com/shivanshshrivas/SafeChain',
       devpostUrl: 'https://devpost.com/software/safe-chain-3zi5m6',
       award: 'Winner',
@@ -47,6 +47,8 @@ export default function Home() {
       detailedDescription: 'Built a decentralized application to tokenize property deeds as NFTs using Solidity smart contracts. Implemented secure file storage on IPFS for decentralized property document management. Created an intuitive React frontend for property owners to mint, transfer, and verify property deed NFTs. Awarded $400+ scholarship by Kansas Blockchain Fellowship for innovative use of blockchain technology and secure smart contract implementation.',
       technologies: ['ReactJS', 'NodeJS', 'Solidity', 'IPFS'],
       githubUrl: 'https://github.com/JayP04/Decenentralized-Property-ledger',
+      devpostUrl: 'https://devpost.com/software/propnfts',
+      award: '$400+ Scholarship',
       featured: true,
     },
   ];
