@@ -45,7 +45,7 @@ export default function Home() {
       title: 'PropNFTs',
       description: 'dApp to tokenize property deeds as NFTs. Awarded $400+ scholarship for innovation and secure smart contract use.',
       detailedDescription: 'Built a decentralized application to tokenize property deeds as NFTs using Solidity smart contracts. Implemented secure file storage on IPFS for decentralized property document management. Created an intuitive React frontend for property owners to mint, transfer, and verify property deed NFTs. Awarded $400+ scholarship by Kansas Blockchain Fellowship for innovative use of blockchain technology and secure smart contract implementation.',
-      technologies: ['ReactJS', 'NodeJS', 'Solidity', 'IPFS'],
+      technologies: ['React', 'NodeJS', 'Solidity', 'IPFS'],
       githubUrl: 'https://github.com/JayP04/Decenentralized-Property-ledger',
       devpostUrl: 'https://devpost.com/software/propnfts',
       award: '$400+ Scholarship',
