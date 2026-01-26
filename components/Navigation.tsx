@@ -43,7 +43,7 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl font-display font-semibold text-coffee-900">
-              Jay
+              Jay Patel
             </Link>
             <ul className="flex gap-8">
               {navLinks.map((link) => (
