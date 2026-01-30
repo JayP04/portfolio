@@ -40,7 +40,7 @@ export default function Home() {
       award: 'Winner',
       featured: true,
     },
-        {
+    {
       date: 'Aug 2024',
       title: 'PropNFTs',
       description: 'dApp to tokenize property deeds as NFTs. Awarded $400+ scholarship for innovation and secure smart contract use.',
@@ -51,6 +51,17 @@ export default function Home() {
       award: '$400+ Scholarship',
       featured: true,
     },
+    {
+      date: 'Jan 2026',
+      title: 'AI-Powered Tableau Dashboard Generator',
+      description: 'Automate dashboard creation using AI to analyze data and recommendvisualizations, charts, and KPIs.',
+      detailedDescription: 'more details to come',
+      technologies: [],
+      githubUrl: '',
+      devpostUrl: '',
+      featured: true,
+    }
+
   ];
 
   // // All projects timeline (oldest to newest) - Featured projects removed
