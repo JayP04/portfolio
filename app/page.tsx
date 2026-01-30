@@ -56,10 +56,11 @@ export default function Home() {
       title: 'AI-Powered Tableau Dashboard Generator',
       description: 'Automate dashboard creation using AI to analyze data and recommendvisualizations, charts, and KPIs.',
       detailedDescription: 'more details to come',
-      technologies: [],
+      technologies: ['Azure OpenAI', 'Tableau', 'Pydantic', 'Langgraph', 'Streamlit'],
       githubUrl: '',
       devpostUrl: '',
       featured: true,
+      inprogress: true,
     }
 
   ];
