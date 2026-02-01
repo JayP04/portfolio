@@ -21,6 +21,17 @@ export default function Home() {
       inprogress: true,
     },
     {
+      date: 'Jan 2026',
+      title: 'AI-Powered Tableau Dashboard Generator',
+      description: 'Automate dashboard creation using AI to analyze data and recommendvisualizations, charts, and KPIs.',
+      detailedDescription: 'more details to come',
+      technologies: ['Azure OpenAI', 'Tableau', 'Pydantic', 'Langgraph', 'Streamlit'],
+      githubUrl: '',
+      devpostUrl: '',
+      featured: false,
+      inprogress: true,
+    },
+    {
       title: 'SafeChain',
       description: 'Decentralized disaster communication app with WiFi-based messaging and peer device visualization.',
       detailedDescription: 'Led front-end development and WiFi-based messaging implementation for a decentralized disaster communication application. Built real-time peer device visualization using Leaflet.js mapping library and implemented local message storage with IPFS synchronization for offline-first architecture. Integrated WebSocket connections for instant communication and deployed smart contracts on Polygon network for decentralized message verification.',
@@ -51,17 +62,7 @@ export default function Home() {
       award: '$400+ Scholarship',
       featured: true,
     },
-    {
-      date: 'Jan 2026',
-      title: 'AI-Powered Tableau Dashboard Generator',
-      description: 'Automate dashboard creation using AI to analyze data and recommendvisualizations, charts, and KPIs.',
-      detailedDescription: 'more details to come',
-      technologies: ['Azure OpenAI', 'Tableau', 'Pydantic', 'Langgraph', 'Streamlit'],
-      githubUrl: '',
-      devpostUrl: '',
-      featured: true,
-      inprogress: true,
-    }
+
 
   ];
 
