@@ -23,7 +23,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Jay Patel',
+  title: 'Jay Patel | Personal Website',
   description: 'Portfolio of Jay Patel',
   icons: {
     icon: '/favicon.png',

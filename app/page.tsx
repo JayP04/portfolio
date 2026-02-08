@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import ProjectCard from '@/components/ProjectCard';
 // import ProjectTimeline from '@/components/ProjectTimeline';
 import ContactForm from '@/components/ContactForm';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa';
 
 export default function Home() {
   // Featured projects (2-3 highlights)
@@ -112,7 +112,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-6xl md:text-7xl font-display font-light text-coffee-900 mb-6">
-                Hey, I'm <span className="font-semibold">Jay</span>
+                Hey, I'm <span className="font-semibold">Jay Patel</span>
               </h1>
               <p className="text-xl text-warm-gray leading-relaxed mb-8">
                 Computer Science student at the University of Kansas, building the future one project at a time. 
@@ -136,6 +136,15 @@ export default function Home() {
                   className="interactive text-coffee-900 hover:text-terracotta-500 transition-colors"
                 >
                   <FaGithub size={28} />
+                </a>
+                <a
+                  href="/files/Patent.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-semibold text-coffee-900 transition-colors hover:text-terracotta-500"
+                >
+                  Check out my Patent
+                  <FaExternalLinkAlt size={14} className="inline-block ml-2" />
                 </a>
               </div>
             </motion.div>
