@@ -80,17 +80,26 @@ export default function Home() {
   // ];
 
   const experiences = [
+    // {
+    //   role: 'Android App Developer',
+    //   company: 'CyPhyLabs, Tunnels to Towers Foundation',
+    //   period: 'Jun 2024 – Feb 2025',
+    //   description: 'Developed Android app for 5000+ users using Kotlin and XML with PostgreSQL. Led UI design for admin team of 4, creating cross-platform notification features. Secured $100K+ order for 150+ smart mirrors benefitting 400+ disabled veterans.',
+    // },
     {
-      role: 'Android App Developer',
-      company: 'CyPhyLabs, Tunnels to Towers Foundation',
-      period: 'Jun 2024 – Feb 2025',
-      description: 'Developed Android app for 5000+ users using Kotlin and XML with PostgreSQL. Led UI design for admin team of 4, creating cross-platform notification features. Secured $100K+ order for 150+ smart mirrors benefitting 400+ disabled veterans.',
+      role: 'Product Engineering Intern',
+      company: 'Center for Design Research, T-Mobile',
+      period: 'Aug 2023 – Jan 2024',
+      description: 'Led team of 10 designing pocket-sized AI device for clinical note transcription. Improved nurse-to-patient ratios from 1:10 to 1:3, reducing documentation workload by 24%. Collaborated with T-Mobile stakeholders on product design and market alignment.',
+      achievements: [
+        { label: 'Patent', url: '/files/Patent.pdf' },
+      ],
     },
     {
-      role: 'UI/UX Researcher',
-      company: 'Center for Design Research, T-Mobile',
-      period: 'Aug 2023 – Sep 2024',
-      description: 'Led team of 10 designing pocket-sized AI device for clinical note transcription. Improved nurse-to-patient ratios from 1:10 to 1:3, reducing documentation workload by 24%. Collaborated with T-Mobile stakeholders on product design and market alignment.',
+      role: 'Software Developer',
+      company: 'Kansas Data Science Consortium (KDSC)',
+      period: 'Jan 2025 – Present',
+      description: 'Architecting 8-component microservices application generating Tableau dashboards from CSV files using Python, Azure OpenAI, LangGraph, and Pandas to automate visualization recommendations. Building data processing pipeline with Pandas for dataset analysis and developing Streamlit web interface for file upload and workbook generation.',
     },
     // {
     //   role: 'Freelance Web Developer',
@@ -211,6 +220,22 @@ export default function Home() {
                   </span>
                 </div>
                 <p className="text-warm-gray leading-relaxed">{exp.description}</p>
+                {exp.achievements?.length ? (
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {exp.achievements.map((achievement) => (
+                      <a
+                        key={achievement.label}
+                        href={achievement.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-coffee-900/10 bg-cream-100 px-4 py-1 text-sm font-mono text-coffee-900 transition-colors hover:text-terracotta-500"
+                      >
+                        {achievement.label}
+                        <FaExternalLinkAlt size={12} />
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
               </motion.div>
             ))}
           </div>
@@ -312,7 +337,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-sm font-semibold text-coffee-900 mb-3">Languages</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['Python', 'JavaScript', 'TypeScript', 'Kotlin', 'SQL', 'Solidity'].map((skill) => (
+                    {['Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'Kotlin', 'SQL', 'Solidity', 'HTML'].map((skill) => (
                       <span
                         key={skill}
                         className="px-3 py-1 bg-cream-100 border border-coffee-900/10 rounded-full text-sm font-mono"
@@ -325,7 +350,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-sm font-semibold text-coffee-900 mb-3">Frameworks</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['React', 'Next.js', 'Node.js', 'Flask', 'React Native'].map((skill) => (
+                    {['React', 'Next.js', 'Node.js', 'Express.js', 'Flask', 'React Native', 'Tailwind CSS'].map((skill) => (
                       <span
                         key={skill}
                         className="px-3 py-1 bg-cream-100 border border-coffee-900/10 rounded-full text-sm font-mono"
@@ -338,7 +363,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-sm font-semibold text-coffee-900 mb-3">Technologies</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['PostgreSQL', 'MongoDB', 'Supabase', 'Firebase', 'IPFS', 'Blockchain'].map((skill) => (
+                    {['PostgreSQL', 'MongoDB', 'Supabase', 'Firebase', 'IPFS', 'Blockchain', 'Vercel', 'Cloudflare R2', 'Azure OpenAI', 'Docker', 'Git', 'GitHub', 'Pandas', 'LangGraph', 'Pydantic', 'Streamlit', 'REST APIs', 'Agile/Scrum', 'CI/CD', 'pytest'].map((skill) => (
                       <span
                         key={skill}
                         className="px-3 py-1 bg-cream-100 border border-coffee-900/10 rounded-full text-sm font-mono"
