@@ -407,7 +407,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-warm-gray text-sm">
-              © 2025 Jay. Built with Next.js and care.
+              © 2026 Jay. Built with Next.js and care.
             </p>
             <div className="flex gap-6">
               <a
@@ -427,10 +427,9 @@ export default function Home() {
                 GitHub
               </a>
               <a
-                href="mailto:jayrpatel2004@gmail.com"
                 className="interactive text-warm-gray hover:text-terracotta-500 transition-colors text-sm"
               >
-                Email
+                Email: jayrpatel2004 [at] gmail [got] com
               </a>
             </div>
           </div>
