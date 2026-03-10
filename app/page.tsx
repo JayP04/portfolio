@@ -27,7 +27,6 @@ export default function Home() {
       detailedDescription: 'more details to come',
       technologies: ['Azure OpenAI', 'Tableau', 'Pydantic', 'Langgraph', 'Streamlit'],
       githubUrl: '',
-      devpostUrl: '',
       featured: false,
       inprogress: true,
     },
@@ -62,6 +61,18 @@ export default function Home() {
       award: '$400+ Scholarship',
       featured: true,
     },
+
+    {date: 'Mar 2026',
+    title: 'Xenmo',
+    description: 'Cross-border P2P payment app on XRPL enabling instant currency conversion at ~$0.03 fees vs $12-50 through traditional services.',
+    detailedDescription: 'Built a peer-to-peer cross-border payment web app on the XRP Ledger, enabling atomic cross-currency swaps (USD, INR, EUR, NGN) settling in 3-5 seconds at near-zero XRP fees. Implemented QR code payments for in-person transactions, conditional escrow with PREIMAGE-SHA-256 crypto-conditions for code-based remote transfers, and DEX order book integration with bid-ask spread liquidity for real-time exchange rates. Designed pathfinding-with-fallback payment engine using XRP auto-bridging, trust line security model for compliance-ready access control, and full transaction history with on-chain verification via XRPL Explorer.',
+    technologies: ['NextJS', 'xrpl.js', 'Tailwind CSS', 'Gemini API'],
+    githubUrl: 'https://github.com/JayP04/xenmo',
+    devpostUrl: 'https://devpost.com/software/xenmo',
+    liveUrl: 'https://xenmo.vercel.app',
+    award: 'Winner ($1000 prize)',
+    featured: true,
+   },
 
 
   ];
