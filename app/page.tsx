@@ -309,7 +309,7 @@ export default function Home() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Education */}
+            {/* Education
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -332,7 +332,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Skills */}
             <motion.div
