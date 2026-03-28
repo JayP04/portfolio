@@ -374,7 +374,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-sm font-semibold text-coffee-900 mb-3">Technologies</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['PostgreSQL', 'MongoDB', 'Supabase', 'Firebase', 'IPFS', 'Blockchain', 'Vercel', 'Cloudflare R2', 'Azure OpenAI', 'Docker', 'Git', 'GitHub', 'Pandas', 'LangGraph', 'Pydantic', 'Streamlit', 'REST APIs', 'Agile/Scrum', 'CI/CD', 'pytest'].map((skill) => (
+                    {['Vercel', 'Cloudflare R2', 'Azure OpenAI', 'Docker', 'Git', 'GitHub', 'LangGraph', 'Pydantic', 'Streamlit', 'REST APIs', 'PostgreSQL', 'MongoDB', 'Supabase', 'Firebase', 'IPFS', 'Blockchain', 'Pandas', 'Agile/Scrum', 'CI/CD', 'pytest'].map((skill) => (
                       <span
                         key={skill}
                         className="px-3 py-1 bg-cream-100 border border-coffee-900/10 rounded-full text-sm font-mono"
