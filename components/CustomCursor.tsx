@@ -19,6 +19,11 @@ export default function CustomCursor({
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [trail, setTrail] = useState<Array<{ x: number; y: number; id: number }>>([]);
   const [isHovering, setIsHovering] = useState(false);
+  const [hasFinePointer, setHasFinePointer] = useState(false);
+
+  useEffect(() => {
+    setHasFinePointer(window.matchMedia('(pointer: fine)').matches);
+  }, []);
 
   useEffect(() => {
     if (type === 'none') return;
@@ -65,7 +70,7 @@ export default function CustomCursor({
     return () => clearInterval(interval);
   }, []);
 
-  if (type === 'none') return null;
+  if (type === 'none' || !hasFinePointer) return null;
 
   const currentSize = isHovering ? glowSize * hoverScale : glowSize;
 

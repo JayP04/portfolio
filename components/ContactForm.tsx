@@ -41,7 +41,7 @@ export default function ContactForm() {
   return (
     <motion.form
       onSubmit={handleSubmit}
-      className="max-w-2xl"
+      className="w-full"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -58,7 +58,7 @@ export default function ContactForm() {
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 bg-cream-100 border-2 border-coffee-900/10 rounded-xl focus:border-terracotta-500 focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-cream-50 border-2 border-coffee-900/10 rounded-xl focus:border-terracotta-500 focus:outline-none transition-colors"
             placeholder="Your name"
           />
         </div>
@@ -73,7 +73,7 @@ export default function ContactForm() {
             required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 bg-cream-100 border-2 border-coffee-900/10 rounded-xl focus:border-terracotta-500 focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-cream-50 border-2 border-coffee-900/10 rounded-xl focus:border-terracotta-500 focus:outline-none transition-colors"
             placeholder="your.email@example.com"
           />
         </div>
@@ -88,7 +88,7 @@ export default function ContactForm() {
             rows={5}
             value={formData.reason}
             onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-            className="w-full px-4 py-3 bg-cream-100 border-2 border-coffee-900/10 rounded-xl focus:border-terracotta-500 focus:outline-none transition-colors resize-none"
+            className="w-full px-4 py-3 bg-cream-50 border-2 border-coffee-900/10 rounded-xl focus:border-terracotta-500 focus:outline-none transition-colors resize-none"
             placeholder="Tell me a bit about what you'd like to chat about..."
           />
         </div>

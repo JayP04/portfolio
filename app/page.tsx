@@ -1,452 +1,131 @@
 'use client';
 
-import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import Hero from '@/components/hero/Hero';
+import Highlights from '@/components/Highlights';
+import ExperienceTimeline from '@/components/ExperienceTimeline';
 import ProjectCard from '@/components/ProjectCard';
-// import ProjectTimeline from '@/components/ProjectTimeline';
 import ContactForm from '@/components/ContactForm';
-import { FaLinkedin, FaGithub, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa';
+import Skills from '@/components/Skills';
+import { projects, experiences } from '@/lib/data';
+import { useCan3D } from '@/lib/useCan3D';
+
+// WebGL is loaded on its own after the page renders, so it never delays the first paint
+const ScrollRing = dynamic(() => import('@/components/hero/ScrollRing'), { ssr: false });
+
+function SectionHeading({ index, light, bold, children }: { index: string; light: string; bold: string; children?: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="mb-14"
+    >
+      <p className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-terracotta-500">
+        <span>{index}</span>
+        <span className="h-px w-10 bg-terracotta-500/50" />
+      </p>
+      <h2 className="text-5xl md:text-6xl font-display font-light text-coffee-900 mb-4">
+        {light} <span className="font-semibold">{bold}</span>
+      </h2>
+      {children && <p className="text-warm-gray text-lg max-w-2xl">{children}</p>}
+    </motion.div>
+  );
+}
 
 export default function Home() {
-  // Featured projects (2-3 highlights)
-  const featuredProjects = [
-    {
-      title: 'CloudVault',
-      description: 'Privacy-first photo storage app achieving 93% cost reduction vs Big Tech. Handles 500GB per user with zero egress fees.',
-      detailedDescription: 'Designed and deployed privacy-first photo storage app using Next.js, Supabase, and Cloudflare R2, achieving 93% cost reduction vs Big Tech competitors while maintaining zero egress fees. Developed automated EXIF metadata extraction with multi-tier fallbacks and PostgreSQL Row-Level Security, enabling secure multi-user photo sharing with 30-day recovery protection. Solved production challenges including concurrent upload optimization, CORS configuration, and storage quota race conditions, delivering stable system handling 500GB per user across web and mobile PWA.',
-      technologies: ['NextJS', 'Supabase', 'Cloudflare R2', 'PostgreSQL', 'PWA'],
-      githubUrl: 'https://github.com/JayP04/CloudVault',
-      liveUrl: 'https://cloud-vault-beta.vercel.app',
-      featured: true,
-      inprogress: true,
-    },
-    {
-      date: 'Jan 2026',
-      title: 'AI-Powered Tableau Dashboard Generator',
-      description: 'Automate dashboard creation using AI to analyze data and recommendvisualizations, charts, and KPIs.',
-      detailedDescription: 'more details to come',
-      technologies: ['Azure OpenAI', 'Tableau', 'Pydantic', 'Langgraph', 'Streamlit'],
-      githubUrl: '',
-      featured: false,
-      inprogress: true,
-    },
-    {
-      title: 'SafeChain',
-      description: 'Decentralized disaster communication app with WiFi-based messaging and peer device visualization.',
-      detailedDescription: 'Led front-end development and WiFi-based messaging implementation for a decentralized disaster communication application. Built real-time peer device visualization using Leaflet.js mapping library and implemented local message storage with IPFS synchronization for offline-first architecture. Integrated WebSocket connections for instant communication and deployed smart contracts on Polygon network for decentralized message verification.',
-      technologies: ['React', 'NodeJS', 'PostgreSQL', 'WebSockets', 'IPFS', 'Pinata'],
-      githubUrl: 'https://github.com/shivanshshrivas/SafeChain',
-      devpostUrl: 'https://devpost.com/software/safe-chain-3zi5m6',
-      award: 'Winner',
-      featured: true,
-    },
-    {
-      title: 'CodeLingo',
-      description: 'Visual code-learning website with dynamic execution tracing for beginners.',
-      detailedDescription: 'Created an interactive visual code-learning platform featuring dynamic execution tracing that helps beginners understand how code executes step-by-step. Implemented Firebase authentication for user management and progress tracking. Designed an intuitive front-end interface with real-time code visualization and integrated Flask backend for secure code execution in sandboxed environments. The platform provides an engaging learning experience with visual feedback at each execution step.',
-      technologies: ['NextJS', 'React', 'Firebase', 'Flask', 'PostgreSQL'],
-      githubUrl: 'https://github.com/an-siuu-man/code-lingo',
-      devpostUrl: 'https://devpost.com/software/codelingo-lg9a4q',
-      award: 'Winner',
-      featured: true,
-    },
-    {
-      date: 'Aug 2024',
-      title: 'PropNFTs',
-      description: 'dApp to tokenize property deeds as NFTs. Awarded $400+ scholarship for innovation and secure smart contract use.',
-      detailedDescription: 'Built a decentralized application to tokenize property deeds as NFTs using Solidity smart contracts. Implemented secure file storage on IPFS for decentralized property document management. Created an intuitive React frontend for property owners to mint, transfer, and verify property deed NFTs. Awarded $400+ scholarship by Kansas Blockchain Fellowship for innovative use of blockchain technology and secure smart contract implementation.',
-      technologies: ['React', 'NodeJS', 'Solidity', 'IPFS'],
-      githubUrl: 'https://github.com/JayP04/Decenentralized-Property-ledger',
-      devpostUrl: 'https://devpost.com/software/propnfts',
-      award: '$400+ Scholarship',
-      featured: true,
-    },
-
-    {date: 'Mar 2026',
-    title: 'Xenmo',
-    description: 'Cross-border P2P payment app on XRPL enabling instant currency conversion at ~$0.03 fees vs $12-50 through traditional services.',
-    detailedDescription: 'Built a peer-to-peer cross-border payment web app on the XRP Ledger, enabling atomic cross-currency swaps (USD, INR, EUR, NGN) settling in 3-5 seconds at near-zero XRP fees. Implemented QR code payments for in-person transactions, conditional escrow with PREIMAGE-SHA-256 crypto-conditions for code-based remote transfers, and DEX order book integration with bid-ask spread liquidity for real-time exchange rates. Designed pathfinding-with-fallback payment engine using XRP auto-bridging, trust line security model for compliance-ready access control, and full transaction history with on-chain verification via XRPL Explorer.',
-    technologies: ['NextJS', 'xrpl.js', 'Tailwind CSS', 'Gemini API'],
-    githubUrl: 'https://github.com/JayP04/xenmo',
-    devpostUrl: 'https://devpost.com/software/xenmo',
-    liveUrl: 'https://xenmo.vercel.app',
-    award: 'Winner ($1000 prize)',
-    featured: true,
-   },
-
-
-  ];
-
-  // // All projects timeline (oldest to newest) - Featured projects removed
-  // const timelineProjects = [
-  //   {
-  //     date: 'Dec 2024',
-  //     title: 'WaitForIt.io',
-  //     description: 'Time-capsule platform where users create memory capsules for delayed delivery.',
-  //     detailedDescription: 'Built a unique time-capsule platform enabling users to create memory capsules for scheduled future delivery. Implemented MongoDB for flexible document storage of media and metadata, integrated Supabase for user authentication and real-time database features. Developed Express.js backend with scheduled job processing for automated capsule delivery at specified dates. Created an emotional and intuitive user experience for preserving memories.',
-  //     technologies: ['NextJS', 'NodeJS', 'MongoDB', 'Supabase'],
-  //     githubUrl: 'https://github.com/yourusername/waitforit',
-  //     liveUrl: 'https://waitforit.io',
-  //   },
-  // ];
-
-  const experiences = [
-    // {
-    //   role: 'Android App Developer',
-    //   company: 'CyPhyLabs, Tunnels to Towers Foundation',
-    //   period: 'Jun 2024 – Feb 2025',
-    //   description: 'Developed Android app for 5000+ users using Kotlin and XML with PostgreSQL. Led UI design for admin team of 4, creating cross-platform notification features. Secured $100K+ order for 150+ smart mirrors benefitting 400+ disabled veterans.',
-    // },
-    {
-      role: 'Product Engineering Intern',
-      company: 'Center for Design Research, T-Mobile',
-      period: 'Aug 2023 – Jan 2024',
-      description: 'Led team of 10 designing pocket-sized AI device for clinical note transcription. Improved nurse-to-patient ratios from 1:10 to 1:3, reducing documentation workload by 24%. Collaborated with T-Mobile stakeholders on product design and market alignment.',
-      achievements: [
-        { label: 'Patent', url: '/files/Patent.pdf' },
-      ],
-    },
-    {
-      role: 'Software Developer',
-      company: 'Kansas Data Science Consortium (KDSC)',
-      period: 'Jan 2025 – Present',
-      description: 'Architecting 8-component microservices application generating Tableau dashboards from CSV files using Python, Azure OpenAI, LangGraph, and Pandas to automate visualization recommendations. Building data processing pipeline with Pandas for dataset analysis and developing Streamlit web interface for file upload and workbook generation.',
-    },
-    // {
-    //   role: 'Freelance Web Developer',
-    //   company: 'Independent',
-    //   period: '2023 – Present',
-    //   description: 'Created custom websites for 3+ local vendors and small businesses. Implemented e-commerce solutions, booking systems, and content management platforms. Managed full project lifecycle from consultation through deployment and maintenance.',
-    // },
-  ];
+  const { can3D, reducedMotion } = useCan3D();
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section id="about" className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-6xl md:text-7xl font-display font-light text-coffee-900 mb-6">
-                Hey, I'm <span className="font-semibold">Jay Patel</span>
-              </h1>
-              <p className="text-xl text-warm-gray leading-relaxed mb-8">
-                Computer Science student at the University of Kansas, building the future one project at a time. 
-                I specialize in full-stack development, blockchain technology, and creating products that actually 
-                solve real problems.
-              </p>
+      <Hero />
+      {can3D && <ScrollRing reducedMotion={reducedMotion} />}
 
+      <Highlights />
+
+      {/* Experience */}
+      <section id="experience" className="py-24 px-6 bg-cream-100">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeading index="01" light="Work" bold="Experience" />
+          <ExperienceTimeline experiences={experiences} />
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading index="02" light="Featured" bold="Projects">
+            A selection of projects I&apos;m most proud of. Each one taught me something valuable about building
+            software that matters.
+          </SectionHeading>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.title} index={index} {...project} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="py-24 px-6 bg-cream-100">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading index="03" light="Tools &" bold="Skills" />
+          <Skills />
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="connect" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1.2fr] gap-16">
+          <div>
+            <SectionHeading index="04" light="Let's" bold="Connect">
+              Hiring for blockchain, software or product? Want to collaborate, or just chat about tech? Drop me a
+              message and I&apos;ll get back to you soon.
+            </SectionHeading>
+            <div className="space-y-4">
+              <p className="flex items-center gap-3 text-coffee-900">
+                <FaEnvelope className="text-terracotta-500" />
+                <span className="font-mono text-sm">jayrpatel2004 [at] gmail [dot] com</span>
+              </p>
               <div className="flex gap-4">
                 <a
                   href="https://www.linkedin.com/in/jaypatel2004/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive text-coffee-900 hover:text-terracotta-500 transition-colors"
+                  className="interactive inline-flex items-center gap-2 text-coffee-900 hover:text-terracotta-500 transition-colors"
                 >
-                  <FaLinkedin size={28} />
+                  <FaLinkedin size={20} /> LinkedIn
                 </a>
                 <a
                   href="https://github.com/JayP04"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive text-coffee-900 hover:text-terracotta-500 transition-colors"
+                  className="interactive inline-flex items-center gap-2 text-coffee-900 hover:text-terracotta-500 transition-colors"
                 >
-                  <FaGithub size={28} />
-                </a>
-                <a
-                  href="/files/Patent.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg font-semibold text-coffee-900 transition-colors hover:text-terracotta-500"
-                >
-                  Check out my Patent
-                  <FaExternalLinkAlt size={14} className="inline-block ml-2" />
+                  <FaGithub size={20} /> GitHub
                 </a>
               </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative w-full aspect-square max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-br from-terracotta-400 to-coffee-900 rounded-3xl transform rotate-6" />
-                <div className="relative bg-cream-100 rounded-3xl overflow-hidden border-4 border-coffee-900">
-                  {/* Replace with actual image */}
-                  <Image
-                    src="/profile.jpg" 
-                    alt="Jay Patel"
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                </div>
-              </div>
-            </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Experience */}
-      <section id="experience" className="py-20 px-6 bg-cream-100">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-12"
-          >
-            <h2 className="text-5xl font-display font-light text-coffee-900 mb-4">
-              Work <span className="font-semibold">Experience</span>
-            </h2>
-          </motion.div>
-
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.role}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-cream-50 border-2 border-coffee-900/10 rounded-2xl p-8"
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-display font-semibold text-coffee-900 mb-1">
-                      {exp.role}
-                    </h3>
-                    <p className="text-terracotta-500 font-medium">{exp.company}</p>
-                  </div>
-                  <span className="text-sm font-mono text-warm-gray mt-2 md:mt-0">
-                    {exp.period}
-                  </span>
-                </div>
-                <p className="text-warm-gray leading-relaxed">{exp.description}</p>
-                {exp.achievements?.length ? (
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    {exp.achievements.map((achievement) => (
-                      <a
-                        key={achievement.label}
-                        href={achievement.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border border-coffee-900/10 bg-cream-100 px-4 py-1 text-sm font-mono text-coffee-900 transition-colors hover:text-terracotta-500"
-                      >
-                        {achievement.label}
-                        <FaExternalLinkAlt size={12} />
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
-              </motion.div>
-            ))}
+          <div className="rounded-3xl border-2 border-coffee-900/10 bg-cream-100 p-6 md:p-10">
+            <ContactForm />
           </div>
-        </div>
-      </section>
-
-      {/* Featured Projects */}
-      <section id="projects" className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-5xl font-display font-light text-coffee-900 mb-4">
-              Featured <span className="font-semibold">Projects</span>
-            </h2>
-            <p className="text-warm-gray text-lg mb-12 max-w-2xl">
-              A selection of projects I'm most proud of. Each one taught me something valuable 
-              about building software that matters.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.title} {...project} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* More Projects
-      <section className="py-20 px-6 bg-cream-100">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-12"
-          >
-            <h2 className="text-5xl font-display font-light text-coffee-900 mb-4">
-              More <span className="font-semibold">Projects</span>
-            </h2>
-            <p className="text-warm-gray text-lg">
-              Other projects I've built while learning and exploring new technologies.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {timelineProjects.map((project) => (
-              <ProjectCard key={project.title} {...project} />
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* Skills & Education */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Education
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-4xl font-display font-light text-coffee-900 mb-8">
-                <span className="font-semibold">Education</span>
-              </h2>
-              <div className="bg-cream-100 border-2 border-coffee-900/10 rounded-2xl p-8">
-                <h3 className="text-2xl font-display font-semibold text-coffee-900 mb-2">
-                  University of Kansas
-                </h3>
-                <p className="text-terracotta-500 font-medium mb-4">B.S. in Computer Science with CyberSecurity Certification</p>
-                <p className="text-sm font-mono text-warm-gray mb-4">Expected May 2026</p>
-                <div className="space-y-3">
-                  <div>
-                    <span className="text-sm text-warm-gray">Honors:</span>
-                    <span className="ml-2">Class Honor Roll - All Semesters</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div> */}
-
-            {/* Skills */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <h2 className="text-4xl font-display font-light text-coffee-900 mb-8">
-                <span className="font-semibold">Skills</span>
-              </h2>
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-sm font-semibold text-coffee-900 mb-3">Languages</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {['Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'Kotlin', 'SQL', 'Solidity', 'HTML'].map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-cream-100 border border-coffee-900/10 rounded-full text-sm font-mono"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-coffee-900 mb-3">Frameworks</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {['React', 'Next.js', 'Node.js', 'Express.js', 'Flask', 'React Native', 'Tailwind CSS'].map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-cream-100 border border-coffee-900/10 rounded-full text-sm font-mono"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-coffee-900 mb-3">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {['Vercel', 'Cloudflare R2', 'Azure OpenAI', 'Docker', 'Git', 'GitHub', 'LangGraph', 'Pydantic', 'Streamlit', 'REST APIs', 'PostgreSQL', 'MongoDB', 'Supabase', 'Firebase', 'IPFS', 'Blockchain', 'Pandas', 'Agile/Scrum', 'CI/CD', 'pytest'].map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-cream-100 border border-coffee-900/10 rounded-full text-sm font-mono"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="connect" className="py-20 px-6 bg-cream-100">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-12"
-          >
-            <h2 className="text-5xl font-display font-light text-coffee-900 mb-4">
-              Let's <span className="font-semibold">Connect</span>
-            </h2>
-            <p className="text-warm-gray text-lg max-w-2xl">
-              Have a project in mind? Want to collaborate? Or just want to chat about tech? 
-              Drop me a message and I'll get back to you soon.
-            </p>
-          </motion.div>
-
-          <ContactForm />
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-coffee-900/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-warm-gray text-sm">
-              © 2026 Jay. Built with Next.js and care.
-            </p>
-            <div className="flex gap-6">
-              <a
-                href="https://linkedin.com/in/jaypatel2004/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="interactive text-warm-gray hover:text-terracotta-500 transition-colors text-sm"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://github.com/JayP04"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="interactive text-warm-gray hover:text-terracotta-500 transition-colors text-sm"
-              >
-                GitHub
-              </a>
-              <a
-                className="interactive text-warm-gray hover:text-terracotta-500 transition-colors text-sm"
-              >
-                Email: jayrpatel2004 [at] gmail [got] com
-              </a>
-            </div>
-          </div>
+      <footer className="py-10 px-6 border-t border-coffee-900/10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-warm-gray text-sm">© 2026 Jay Patel. Built with Next.js and care.</p>
+          <a href="#about" className="interactive text-sm font-mono text-warm-gray hover:text-terracotta-500 transition-colors">
+            Back to top ↑
+          </a>
         </div>
       </footer>
     </main>
   );
 }
-
