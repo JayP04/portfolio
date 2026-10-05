@@ -2,7 +2,8 @@
 
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { FaTrophy, FaAward, FaGraduationCap, FaFileAlt, FaArrowRight } from 'react-icons/fa';
+import { FaTrophy, FaGraduationCap, FaFileAlt, FaArrowRight } from 'react-icons/fa';
+// FaAward is used by the commented-out Alexis F. Dillard Award card
 import { hackathonWins, patent } from '@/lib/data';
 import Tilt from './Tilt';
 
@@ -25,8 +26,8 @@ function Card({ delay, span, className, children }: { delay: number; span: strin
 export default function Highlights() {
   return (
     <section aria-label="Highlights" className="px-6 pb-20">
-      <div className="max-w-7xl mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-12">
-        <Card delay={0} span="lg:col-span-5" className="bg-coffee-900 text-cream-50">
+      <div className="max-w-7xl mx-auto grid grid-flow-row-dense gap-4 md:grid-cols-2 lg:grid-cols-12">
+        <Card delay={0} span="lg:col-span-4" className="bg-coffee-900 text-cream-50">
           <div className="flex items-start justify-between mb-6">
             <div>
               <p className="font-display text-7xl font-semibold leading-none">{hackathonWins.length}</p>
@@ -49,7 +50,7 @@ export default function Highlights() {
           </ul>
         </Card>
 
-        <Card delay={0.1} span="lg:col-span-7" className="border-2 border-coffee-900 bg-cream-50 hover:bg-cream-100 !p-0">
+        <Card delay={0.1} span="md:col-span-2 lg:col-span-5" className="bg-terracotta-500 text-cream-50 hover:bg-terracotta-600 !p-0">
           <a
             href={patent.url}
             target="_blank"
@@ -57,16 +58,16 @@ export default function Highlights() {
             className="interactive group flex h-full flex-col justify-between gap-8 p-8"
           >
             <div className="flex items-start justify-between gap-4">
-              <p className="text-sm font-mono uppercase tracking-wider text-terracotta-500">Patent · Co-inventor</p>
-              <FaFileAlt size={24} className="text-coffee-900 shrink-0" />
+              <p className="text-sm font-mono uppercase tracking-wider text-cream-50/80">Patent · Co-inventor</p>
+              <FaFileAlt size={24} className="text-cream-50/90 shrink-0" />
             </div>
             <div>
-              <p className="font-display text-2xl md:text-3xl font-semibold leading-tight text-coffee-900">{patent.title}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-mono text-warm-gray">
+              <p className="font-display text-2xl md:text-3xl font-semibold leading-tight text-cream-50">{patent.title}</p>
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-mono text-cream-50/80">
                 <span>{patent.number}</span>
                 <span>{patent.assignee}</span>
                 <span>Published {patent.published}</span>
-                <span className="ml-auto inline-flex items-center gap-2 text-coffee-900 group-hover:text-terracotta-500">
+                <span className="ml-auto inline-flex items-center gap-2 text-cream-50 group-hover:underline underline-offset-4">
                   Read it <FaArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
@@ -74,6 +75,7 @@ export default function Highlights() {
           </a>
         </Card>
 
+        {/* Alexis F. Dillard Award card: hidden for now
         <Card delay={0.15} span="lg:col-span-6" className="bg-terracotta-500 text-cream-50 flex flex-col justify-between gap-8">
           <FaAward size={28} className="text-cream-50/90" />
           <div>
@@ -81,8 +83,9 @@ export default function Highlights() {
             <p className="mt-2 text-sm font-mono uppercase tracking-wider text-cream-50/80">University of Kansas</p>
           </div>
         </Card>
+        */}
 
-        <Card delay={0.2} span="lg:col-span-6" className="border-2 border-coffee-900/10 bg-cream-100 flex flex-col justify-between gap-8">
+        <Card delay={0.15} span="lg:col-span-3" className="border-2 border-coffee-900/10 bg-cream-100 flex flex-col justify-between gap-8">
           <FaGraduationCap size={30} className="text-coffee-900" />
           <div>
             <p className="font-display text-3xl font-semibold leading-tight text-coffee-900">B.S. Computer Science</p>

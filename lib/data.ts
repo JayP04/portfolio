@@ -32,7 +32,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/JayP04/CloudVault',
     liveUrl: 'https://cloud-vault-beta.vercel.app',
     featured: true,
-    inprogress: true,
+    inprogress: false,
   },
   {
     date: 'Jan 2026',
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     technologies: ['Azure OpenAI', 'Tableau', 'Pydantic', 'Langgraph', 'Streamlit'],
     githubUrl: '',
     featured: false,
-    inprogress: true,
+    inprogress: false,
   },
   {
     title: 'SafeChain',

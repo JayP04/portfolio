@@ -83,7 +83,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1.2fr] gap-16">
           <div>
             <SectionHeading index="04" light="Let's" bold="Connect">
-              Hiring for blockchain, software or product? Want to collaborate, or just chat about tech? Drop me a
+            If you want to collab or just yap about tech ("current state of AI") Drop me a
               message and I&apos;ll get back to you soon.
             </SectionHeading>
             <div className="space-y-4">
