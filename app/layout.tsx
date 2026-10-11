@@ -3,6 +3,7 @@ import { DM_Sans, Crimson_Pro, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import CustomCursor from '@/components/CustomCursor';
 import Navigation from '@/components/Navigation';
+import {Analytics} from '@vercel/analytics/next';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -52,6 +53,7 @@ export default function RootLayout({
         />
         <Navigation />
         {children}
+        <Analytics />
       </body>
     </html>
   );
